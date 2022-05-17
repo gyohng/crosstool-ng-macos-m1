@@ -674,7 +674,7 @@ do_gcc_core_backend() {
     esac
 
     CT_DoLog EXTRA "Building ${log_txt}"
-    CT_DoExecLog ALL make ${CT_JOBSFLAGS} ${core_targets_all}
+    CT_DoExecLog ALL /usr/bin/make ${CT_JOBSFLAGS} ${core_targets_all}
 
     # Do not pass ${CT_JOBSFLAGS} here: recent GCC builds have been failing
     # in parallel 'make install' at random locations: libitm, libcilk,
@@ -685,7 +685,7 @@ do_gcc_core_backend() {
     # attempts to remove the destination and re-create it, but another
     # install gets in the way.
     CT_DoLog EXTRA "Installing ${log_txt}"
-    CT_DoExecLog ALL make ${core_targets_install}
+    CT_DoExecLog ALL /usr/bin/make ${core_targets_install}
 
     # Remove the libtool "pseudo-libraries": having them in the installed
     # tree makes the libtoolized utilities that are built next assume
