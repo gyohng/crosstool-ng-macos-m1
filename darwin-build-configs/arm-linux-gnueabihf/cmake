@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+for arg in "$@"; do
+    if [[ $arg = "--build" ]]; then
+        exec cmake "$@"
+    fi
+done
+
+exec cmake \
+    -G Ninja \
+    -DCMAKE_TOOLCHAIN_FILE=/opt/cross/arm-linux-gnueabihf/toolchain.cmake \
+    "$@"
