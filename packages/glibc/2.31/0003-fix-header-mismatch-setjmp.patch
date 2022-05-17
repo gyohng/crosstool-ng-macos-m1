@@ -1,0 +1,58 @@
+diff -ru glibc-2.31-old/setjmp/bits/setjmp2.h glibc-2.31/setjmp/bits/setjmp2.h
+--- glibc-2.31-old/setjmp/bits/setjmp2.h	2020-02-01 12:52:50.000000000 +0100
++++ glibc-2.31/setjmp/bits/setjmp2.h	2021-08-14 15:57:26.000000000 +0200
+@@ -23,16 +23,16 @@
+ /* Variant of the longjmp functions which perform some sanity checking.  */
+ #ifdef __REDIRECT_NTH
+ extern void __REDIRECT_NTHNL (longjmp,
+-			      (struct __jmp_buf_tag __env[1], int __val),
++			      (struct __jmp_buf_tag *__env, int __val),
+ 			      __longjmp_chk) __attribute__ ((__noreturn__));
+ extern void __REDIRECT_NTHNL (_longjmp,
+-			      (struct __jmp_buf_tag __env[1], int __val),
++			      (struct __jmp_buf_tag *__env, int __val),
+ 			      __longjmp_chk) __attribute__ ((__noreturn__));
+ extern void __REDIRECT_NTHNL (siglongjmp,
+-			      (struct __jmp_buf_tag __env[1], int __val),
++			      (struct __jmp_buf_tag *__env, int __val),
+ 			      __longjmp_chk) __attribute__ ((__noreturn__));
+ #else
+-extern void __longjmp_chk (struct __jmp_buf_tag __env[1], int __val),
++extern void __longjmp_chk (struct __jmp_buf_tag *__env, int __val),
+      __THROWNL __attribute__ ((__noreturn__));
+ # define longjmp __longjmp_chk
+ # define _longjmp __longjmp_chk
+diff -ru glibc-2.31-old/setjmp/setjmp.h glibc-2.31/setjmp/setjmp.h
+--- glibc-2.31-old/setjmp/setjmp.h	2020-02-01 12:52:50.000000000 +0100
++++ glibc-2.31/setjmp/setjmp.h	2021-08-14 15:57:16.000000000 +0200
+@@ -51,11 +51,11 @@
+ /* Store the calling environment in ENV, also saving the
+    signal mask if SAVEMASK is nonzero.  Return 0.
+    This is the internal name for `sigsetjmp'.  */
+-extern int __sigsetjmp (struct __jmp_buf_tag __env[1], int __savemask) __THROWNL;
++extern int __sigsetjmp (struct __jmp_buf_tag *__env, int __savemask) __THROWNL;
+ 
+ /* Store the calling environment in ENV, not saving the signal mask.
+    Return 0.  */
+-extern int _setjmp (struct __jmp_buf_tag __env[1]) __THROWNL;
++extern int _setjmp (struct __jmp_buf_tag *__env) __THROWNL;
+ 
+ /* Do not save the signal mask.  This is equivalent to the `_setjmp'
+    BSD function.  */
+@@ -64,14 +64,14 @@
+ 
+ /* Jump to the environment saved in ENV, making the
+    `setjmp' call there return VAL, or 1 if VAL is 0.  */
+-extern void longjmp (struct __jmp_buf_tag __env[1], int __val)
++extern void longjmp (struct __jmp_buf_tag *__env, int __val)
+      __THROWNL __attribute__ ((__noreturn__));
+ 
+ #if defined __USE_MISC || defined __USE_XOPEN
+ /* Same.  Usually `_longjmp' is used with `_setjmp', which does not save
+    the signal mask.  But it is how ENV was saved that determines whether
+    `longjmp' restores the mask; `_longjmp' is just an alias.  */
+-extern void _longjmp (struct __jmp_buf_tag __env[1], int __val)
++extern void _longjmp (struct __jmp_buf_tag *__env, int __val)
+      __THROWNL __attribute__ ((__noreturn__));
+ #endif
+ 
