@@ -1232,14 +1232,14 @@ do_gcc_backend() {
     fi
 
     CT_DoLog EXTRA "Building final gcc compiler"
-    CT_DoExecLog ALL make ${CT_JOBSFLAGS} all
+    CT_DoExecLog ALL /usr/bin/make ${CT_JOBSFLAGS} all
 
     # See the note on issues with parallel 'make install' in GCC above.
     CT_DoLog EXTRA "Installing final gcc compiler"
     if [ "${CT_STRIP_TARGET_TOOLCHAIN_EXECUTABLES}" = "y" ]; then
-        CT_DoExecLog ALL make install-strip
+        CT_DoExecLog ALL /usr/bin/make install-strip
     else
-        CT_DoExecLog ALL make install
+        CT_DoExecLog ALL /usr/bin/make install
     fi
 
     # Remove the libtool "pseudo-libraries": having them in the installed
