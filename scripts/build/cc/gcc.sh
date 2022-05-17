@@ -640,7 +640,7 @@ do_gcc_core_backend() {
         libgcc_rule="libgcc.mvars"
         core_targets=( gcc target-libgcc )
 
-        CT_DoExecLog ALL make ${CT_JOBSFLAGS} -C gcc ${libgcc_rule}
+        CT_DoExecLog ALL /usr/bin/make ${CT_JOBSFLAGS} -C gcc ${libgcc_rule}
 
         sed -r -i -e 's@-lc@@g' gcc/${libgcc_rule}
     else # build_libgcc
