@@ -257,12 +257,12 @@ glibc_backend_once()
     extra_make_args+=( "BUILD_LDFLAGS=${build_ldflags}" )
 
     CT_DoLog EXTRA "Building C library"
-    CT_DoExecLog ALL make ${CT_JOBSFLAGS}         \
+    CT_DoExecLog ALL /usr/bin/make ${CT_JOBSFLAGS}         \
                           "${extra_make_args[@]}" \
                           all
 
     CT_DoLog EXTRA "Installing C library"
-    CT_DoExecLog ALL make ${CT_JOBSFLAGS}                 \
+    CT_DoExecLog ALL /usr/bin/make ${CT_JOBSFLAGS}                 \
                           "${extra_make_args[@]}"         \
                           install_root="${multi_root}"    \
                           install
@@ -407,7 +407,7 @@ glibc_locales()
         "${extra_config[@]}"
 
     CT_DoLog EXTRA "Building C library localedef"
-    CT_DoExecLog ALL make ${CT_JOBSFLAGS}
+    CT_DoExecLog ALL /usr/bin/make ${CT_JOBSFLAGS}
 
     # The target's endianness and uint32_t alignment should be passed as options
     # to localedef, but glibc's localedef does not support these options, which
@@ -415,7 +415,7 @@ glibc_locales()
     # only if it has the same endianness and uint32_t alignment as the host's.
 
     CT_DoLog EXTRA "Installing C library locales"
-    CT_DoExecLog ALL make ${CT_JOBSFLAGS}                  \
+    CT_DoExecLog ALL /usr/bin/make ${CT_JOBSFLAGS}                  \
                           install_root="${CT_SYSROOT_DIR}" \
                           localedata/install-locales
 }
