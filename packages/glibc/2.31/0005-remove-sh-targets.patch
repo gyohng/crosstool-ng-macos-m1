@@ -1,0 +1,12 @@
+diff -ru glibc-2.31-old/Makefile glibc-2.31/Makefile
+--- a/Makefile	2020-02-01 12:52:50.000000000 +0100
++++ b/Makefile	2022-05-17 21:51:48.604271332 +0200
+@@ -398,7 +398,7 @@
+ 	mv -f $@T $@
+ postclean-generated += debugglibc.sh debugglibc.gdb
+ 
+-others: $(common-objpfx)testrun.sh $(common-objpfx)debugglibc.sh
++others:
+ 
+ # Makerules creates a file `stubs' in each subdirectory, which
+ # contains `#define __stub_FUNCTION' for each function defined in that
