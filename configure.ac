@@ -117,6 +117,7 @@ AC_PROG_RANLIB
 CTNG_PATH_TOOL_REQ([OBJCOPY], [gobjcopy objcopy], [objcopy])
 CTNG_PATH_TOOL_REQ([OBJDUMP], [gobjdump objdump], [objdump])
 CTNG_PATH_TOOL_REQ([READELF], [greadelf readelf], [readelf])
+CTNG_PATH_TOOL_REQ([HELP2MAN], [help2man], [help2man])
 
 CTNG_CHECK_PROGS_REQ([flex], [flex])
 CTNG_CHECK_PROGS_REQ([makeinfo], [makeinfo])
