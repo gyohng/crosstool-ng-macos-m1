@@ -62,7 +62,7 @@ do_kernel_headers()
 
     CT_DoLog EXTRA "Installing kernel headers"
     CT_DoExecLog ALL                                         \
-    make -C "${kernel_path}"                                 \
+    /usr/bin/make -C "${kernel_path}"                                 \
          BASH="$(which bash)"                                \
          HOSTCC="${CT_BUILD}-gcc"                            \
          CROSS_COMPILE="${CT_TARGET}-"                       \
@@ -75,7 +75,7 @@ do_kernel_headers()
     if [ "${CT_KERNEL_LINUX_INSTALL_CHECK}" = "y" ]; then
         CT_DoLog EXTRA "Checking installed headers"
         CT_DoExecLog ALL                                         \
-        make -C "${kernel_path}"                                 \
+        /usr/bin/make -C "${kernel_path}"                                 \
              BASH="$(which bash)"                                \
              HOSTCC="${CT_BUILD}-gcc"                            \
              CROSS_COMPILE="${CT_TARGET}-"                       \
