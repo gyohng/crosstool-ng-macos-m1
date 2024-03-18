@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Helper script for CLion to create toolchains
+
+set -e
+
+for arg in "$@"; do
+    if [[ $arg = "--build" ]]; then
+        exec cmake "$@"
+    fi
+done
+
+exec cmake \
+    -G Ninja \
+    -DCMAKE_TOOLCHAIN_FILE=/opt/cross/aarch64-linux-gnu/toolchain.cmake \
+    "$@"
