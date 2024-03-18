@@ -1,0 +1,33 @@
+diff -ruN gettext-0.20.1a/gettext-tools/gnulib-lib/obstack.c gettext-0.20.1/gettext-tools/gnulib-lib/obstack.c
+--- gettext-0.20.1a/gettext-tools/gnulib-lib/obstack.c	2019-01-06 20:17:05.000000000 +0800
++++ gettext-0.20.1/gettext-tools/gnulib-lib/obstack.c	2024-03-18 22:38:47.089195491 +0800
+@@ -349,6 +349,6 @@
+    variable by default points to the internal function
+    'print_and_abort'.  */
+ __attribute_noreturn__ void (*obstack_alloc_failed_handler) (void)
+-  = print_and_abort;
++  = (void*)print_and_abort;
+ # endif /* !_OBSTACK_NO_ERROR_HANDLER */
+ #endif /* !_OBSTACK_ELIDE_CODE */
+diff -ruN gettext-0.20.1a/gettext-tools/libgettextpo/obstack.c gettext-0.20.1/gettext-tools/libgettextpo/obstack.c
+--- gettext-0.20.1a/gettext-tools/libgettextpo/obstack.c	2019-01-06 20:17:59.000000000 +0800
++++ gettext-0.20.1/gettext-tools/libgettextpo/obstack.c	2024-03-18 22:39:03.667384591 +0800
+@@ -349,6 +349,6 @@
+    variable by default points to the internal function
+    'print_and_abort'.  */
+ __attribute_noreturn__ void (*obstack_alloc_failed_handler) (void)
+-  = print_and_abort;
++  = (void*)print_and_abort;
+ # endif /* !_OBSTACK_NO_ERROR_HANDLER */
+ #endif /* !_OBSTACK_ELIDE_CODE */
+diff -ruN gettext-0.20.1a/libtextstyle/lib/obstack.c gettext-0.20.1/libtextstyle/lib/obstack.c
+--- gettext-0.20.1a/libtextstyle/lib/obstack.c	2019-03-12 03:40:31.000000000 +0800
++++ gettext-0.20.1/libtextstyle/lib/obstack.c	2024-03-18 22:39:09.778562400 +0800
+@@ -349,6 +349,6 @@
+    variable by default points to the internal function
+    'print_and_abort'.  */
+ __attribute_noreturn__ void (*obstack_alloc_failed_handler) (void)
+-  = print_and_abort;
++  = (void*)print_and_abort;
+ # endif /* !_OBSTACK_NO_ERROR_HANDLER */
+ #endif /* !_OBSTACK_ELIDE_CODE */
