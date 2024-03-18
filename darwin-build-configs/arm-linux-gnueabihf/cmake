@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# Helper script for CLion to create toolchains
+
 set -e
 
 for arg in "$@"; do
