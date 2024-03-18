@@ -1,0 +1,132 @@
+diff -ruN bison-3.5a/Makefile.am bison-3.5/Makefile.am
+--- bison-3.5a/Makefile.am	2019-11-21 15:20:48.000000000 +0800
++++ bison-3.5/Makefile.am	2024-03-18 22:23:01.257996272 +0800
+@@ -42,7 +42,7 @@
+ BISON = $(top_builddir)/tests/bison
+ BISON_IN = $(top_srcdir)/tests/bison.in
+ YACC = $(BISON) -o y.tab.c
+-AM_YFLAGS_WITH_LINES = --defines -Werror -Wall --report=all
++AM_YFLAGS_WITH_LINES = --defines -Wall --report=all
+ AM_YFLAGS = $(AM_YFLAGS_WITH_LINES) --no-lines
+ 
+ # Initialization before completion by local.mk's.
+diff -ruN bison-3.5a/Makefile.in bison-3.5/Makefile.in
+--- bison-3.5a/Makefile.in	2024-03-18 20:14:54.000000000 +0800
++++ bison-3.5/Makefile.in	2024-03-18 22:22:54.655374952 +0800
+@@ -2714,7 +2714,7 @@
+ dependencies = $(BISON_IN) $(src_bison_SOURCES) $(dist_skeletons_DATA)
+ BISON = $(top_builddir)/tests/bison
+ BISON_IN = $(top_srcdir)/tests/bison.in
+-AM_YFLAGS_WITH_LINES = --defines -Werror -Wall --report=all
++AM_YFLAGS_WITH_LINES = --defines -Wall --report=all
+ AM_YFLAGS = $(AM_YFLAGS_WITH_LINES) --no-lines
+ 
+ # Initialization before completion by local.mk's.
+diff -ruN bison-3.5a/configure bison-3.5/configure
+--- bison-3.5a/configure	2024-03-18 20:14:54.000000000 +0800
++++ bison-3.5/configure	2024-03-18 22:22:17.798204196 +0800
+@@ -8391,7 +8391,7 @@
+ else
+ 
+   save_CFLAGS=$CFLAGS
+-  CFLAGS='-Wunknown-pragmas -Werror'
++  CFLAGS='-Wunknown-pragmas'
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+@@ -8464,7 +8464,7 @@
+ { $as_echo "$as_me:${as_lineno-$LINENO}: result: $gl_cv_warn_cxx__Werror__Wunknown_warning_option" >&5
+ $as_echo "$gl_cv_warn_cxx__Werror__Wunknown_warning_option" >&6; }
+ if test "x$gl_cv_warn_cxx__Werror__Wunknown_warning_option" = xyes; then :
+-  gl_unknown_warnings_are_errors='-Wunknown-warning-option -Werror'
++  gl_unknown_warnings_are_errors='-Wunknown-warning-option'
+ else
+   gl_unknown_warnings_are_errors=
+ fi
+@@ -9250,7 +9250,7 @@
+ { $as_echo "$as_me:${as_lineno-$LINENO}: result: $gl_cv_warn_c__Werror__Wunknown_warning_option" >&5
+ $as_echo "$gl_cv_warn_c__Werror__Wunknown_warning_option" >&6; }
+ if test "x$gl_cv_warn_c__Werror__Wunknown_warning_option" = xyes; then :
+-  gl_unknown_warnings_are_errors='-Wunknown-warning-option -Werror'
++  gl_unknown_warnings_are_errors='-Wunknown-warning-option'
+ else
+   gl_unknown_warnings_are_errors=
+ fi
+@@ -9396,7 +9396,7 @@
+ else
+ 
+   gl_save_compiler_FLAGS="$CFLAGS"
+-  as_fn_append CFLAGS " $gl_unknown_warnings_are_errors -Werror"
++  as_fn_append CFLAGS " $gl_unknown_warnings_are_errors "
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+@@ -9421,7 +9421,7 @@
+ { $as_echo "$as_me:${as_lineno-$LINENO}: result: $gl_cv_warn_c__Werror" >&5
+ $as_echo "$gl_cv_warn_c__Werror" >&6; }
+ if test "x$gl_cv_warn_c__Werror" = xyes; then :
+-  as_fn_append WERROR_CFLAGS " -Werror"
++  as_fn_append WERROR_CFLAGS " "
+ fi
+ 
+ 
+diff -ruN bison-3.5a/configure.ac bison-3.5/configure.ac
+--- bison-3.5a/configure.ac	2019-12-06 15:27:55.000000000 +0800
++++ bison-3.5/configure.ac	2024-03-18 22:20:53.111398579 +0800
+@@ -65,7 +65,7 @@
+ AC_CACHE_CHECK([whether pragma GCC diagnostic push works],
+   [lv_cv_gcc_pragma_push_works], [
+   save_CFLAGS=$CFLAGS
+-  CFLAGS='-Wunknown-pragmas -Werror'
++  CFLAGS='-Wunknown-pragmas'
+   AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+     #pragma GCC diagnostic push
+     #pragma GCC diagnostic pop
+@@ -137,7 +137,7 @@
+   # meanwhile, turn warnings about unknown options into errors in
+   # CFLAGS, and restore CFLAGS after the tests.
+   save_CFLAGS=$CFLAGS
+-  gl_WARN_ADD([-Werror=unknown-warning-option], [CFLAGS])
++  # gl_WARN_ADD([-Werror=unknown-warning-option], [CFLAGS])
+   # Accept this warning only if it is not too touchy (e.g., clang 3.3
+   # and 3.4).
+   gl_WARN_ADD([-Wunreachable-code], [WARN_CFLAGS],
+@@ -147,7 +147,7 @@
+   do
+     gl_WARN_ADD([$i], [WARN_CFLAGS])
+   done
+-  gl_WARN_ADD([-Werror], [WERROR_CFLAGS])
++  #gl_WARN_ADD([-Werror], [WERROR_CFLAGS])
+ 
+   # Warnings for the test suite, and maybe for bison if GCC is modern
+   # enough.
+@@ -165,7 +165,7 @@
+ 
+   AC_LANG_PUSH([C++])
+   save_CXXFLAGS=$CXXFLAGS
+-  gl_WARN_ADD([-Werror=unknown-warning-option], [CXXFLAGS])
++  #gl_WARN_ADD([-Werror=unknown-warning-option], [CXXFLAGS])
+   for i in $warn_common $warn_cxx;
+   do
+     gl_WARN_ADD([$i], [WARN_CXXFLAGS])
+@@ -185,7 +185,7 @@
+               syntax error
+               #endif
+               ])])
+-  gl_WARN_ADD([-Werror], [WERROR_CXXFLAGS])
++  #gl_WARN_ADD([-Werror], [WERROR_CXXFLAGS])
+   # Warnings for the test suite only.
+   for i in $warn_tests;
+   do
+diff -ruN bison-3.5a/lib/obstack.c bison-3.5/lib/obstack.c
+--- bison-3.5a/lib/obstack.c	2024-03-18 22:23:37.151286086 +0800
++++ bison-3.5/lib/obstack.c	2024-03-18 22:15:40.042813265 +0800
+@@ -348,7 +348,7 @@
+    abort gracefully or use longjump - but shouldn't return.  This
+    variable by default points to the internal function
+    'print_and_abort'.  */
+-__attribute_noreturn__ void (*obstack_alloc_failed_handler) (void)
++__attribute__((noreturn)) void (*obstack_alloc_failed_handler) (void)
+   = (void*)print_and_abort;
+ # endif /* !_OBSTACK_NO_ERROR_HANDLER */
+ #endif /* !_OBSTACK_ELIDE_CODE */
