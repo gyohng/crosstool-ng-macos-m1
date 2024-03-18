@@ -1,0 +1,36 @@
+diff -ruN gcc-11.4.0a/lto-plugin/ChangeLog gcc-11.4.0/lto-plugin/ChangeLog
+--- gcc-11.4.0a/lto-plugin/ChangeLog	2023-05-29 16:46:50.000000000 +0800
++++ gcc-11.4.0/lto-plugin/ChangeLog	2024-03-18 23:17:11.567190235 +0800
+@@ -340,7 +340,7 @@
+ 	PR sanitizer/56781
+ 	* Makefile.am (CFLAGS, LDFLAGS): Filter out -fsanitize=address.
+ 	(liblto_plugin_la_LIBADD, liblto_plugin_la_LDFLAGS,
+-	liblto_plugin_la_DEPENDENCIES): Prefer ../libiberty/noasan/libiberty.a
++	liblto_plugin_la_DEPENDENCIES): Prefer ../libiberty/pic/libiberty.a
+ 	over ../libiberty/pic/libiberty.a if the former exists.
+ 	* Makefile.in: Regenerated.
+ 
+diff -ruN gcc-11.4.0a/lto-plugin/Makefile.am gcc-11.4.0/lto-plugin/Makefile.am
+--- gcc-11.4.0a/lto-plugin/Makefile.am	2023-05-29 16:46:33.000000000 +0800
++++ gcc-11.4.0/lto-plugin/Makefile.am	2024-03-18 23:16:48.974005847 +0800
+@@ -24,7 +24,7 @@
+ 	$(lt_host_flags) -module -avoid-version -bindir $(libexecsubdir)
+ # Can be simplified when libiberty becomes a normal convenience library.
+ libiberty = $(with_libiberty)/libiberty.a
+-libiberty_noasan = $(with_libiberty)/noasan/libiberty.a
++libiberty_noasan = $(with_libiberty)/pic/libiberty.a
+ libiberty_pic = $(with_libiberty)/pic/libiberty.a
+ Wc=-Wc,
+ liblto_plugin_la_LIBADD = \
+diff -ruN gcc-11.4.0a/lto-plugin/Makefile.in gcc-11.4.0/lto-plugin/Makefile.in
+--- gcc-11.4.0a/lto-plugin/Makefile.in	2024-03-18 22:00:36.000000000 +0800
++++ gcc-11.4.0/lto-plugin/Makefile.in	2024-03-18 23:16:24.434076989 +0800
+@@ -356,7 +356,7 @@
+ 	$(libiberty_pic)),,-Wc,$(libiberty)))
+ # Can be simplified when libiberty becomes a normal convenience library.
+ libiberty = $(with_libiberty)/libiberty.a
+-libiberty_noasan = $(with_libiberty)/noasan/libiberty.a
++libiberty_noasan = $(with_libiberty)/pic/libiberty.a
+ libiberty_pic = $(with_libiberty)/pic/libiberty.a
+ Wc = -Wc,
+ liblto_plugin_la_LIBADD = \

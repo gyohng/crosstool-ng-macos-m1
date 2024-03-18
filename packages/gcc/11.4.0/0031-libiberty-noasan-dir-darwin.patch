@@ -1,0 +1,24 @@
+diff -ruN a/libiberty/configure b/libiberty/configure
+--- a/libiberty/configure	2022-05-17 16:15:18.018694964 +0200
++++ b/libiberty/configure	2022-05-17 16:12:31.000000000 +0200
+@@ -5258,7 +5258,7 @@
+ fi
+ 
+ 
+-NOASANFLAG=
++NOASANFLAG=-fno-common
+ case " ${CFLAGS} " in
+   *\ -fsanitize=address\ *) NOASANFLAG=-fno-sanitize=address ;;
+   *\ -fsanitize=hwaddress\ *) NOASANFLAG=-fno-sanitize=hwaddress ;;
+diff -ruN a/libiberty/configure.ac b/libiberty/configure.ac
+--- a/libiberty/configure.ac	2022-05-17 16:16:07.596362322 +0200
++++ b/libiberty/configure.ac	2022-05-17 16:10:36.000000000 +0200
+@@ -237,7 +237,7 @@
+ fi
+ AC_SUBST(PICFLAG)
+ 
+-NOASANFLAG=
++NOASANFLAG=-fno-common
+ case " ${CFLAGS} " in
+   *\ -fsanitize=address\ *) NOASANFLAG=-fno-sanitize=address ;;
+   *\ -fsanitize=hwaddress\ *) NOASANFLAG=-fno-sanitize=hwaddress ;;
