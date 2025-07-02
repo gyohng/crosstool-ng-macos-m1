@@ -122,12 +122,14 @@ do_gmp_backend() {
         extra_config+=("--with-pic")
     fi
 
+    cflags+=" ${CT_GMP_EXTRA_CFLAGS}"
+
     # GMP's configure script doesn't respect the host parameter
     # when not cross-compiling, ie when build == host so set
     # CC_FOR_BUILD and CPP_FOR_BUILD.
     CT_DoExecLog CFG                                \
     CC_FOR_BUILD="${CT_BUILD}-gcc"                  \
-    CPP_FOR_BUILD="{CT_BUILD}-cpp"                  \
+    CPP_FOR_BUILD="${CT_BUILD}-cpp"                 \
     CC="${host}-gcc"                                \
     CFLAGS="${cflags} -fexceptions"                 \
     LDFLAGS="${ldflags}"                            \

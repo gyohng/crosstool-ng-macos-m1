@@ -133,6 +133,8 @@ do_ncurses_backend() {
         esac
     done
 
+    ncurses_opts+=("--disable-widec")
+
     if [ "${CT_NCURSES_NEW_ABI}" != "y" ]; then
         ncurses_opts+=("--with-abi-version=5")
     fi
@@ -149,6 +151,8 @@ do_ncurses_backend() {
     if [ "${shared}" = "y" ]; then
         ncurses_opts+=("--with-shared")
     fi
+
+    cflags+=" ${CT_NCURSES_EXTRA_CFLAGS}"
 
     CT_DoLog EXTRA "Configuring ncurses"
     CT_DoExecLog CFG                                                    \
