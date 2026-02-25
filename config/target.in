@@ -34,6 +34,19 @@ config TARGET_SKIP_CONFIG_SUB
     help
       Skip canonicalization of the target tuple.
 
+config TARGET_OMIT_LIBC_SUFFIX
+    bool "Omit C library suffix from target tuple"
+    select TARGET_SKIP_CONFIG_SUB
+    help
+      Do not append the C library identifier (e.g. "gnu" for glibc,
+      "musl" for musl) to the target tuple. This produces tuples like
+      "aarch64-poky-linux" instead of "aarch64-poky-linux-gnu".
+
+      This matches the convention used by Yocto/OpenEmbedded SDKs.
+      The modified scripts/config.sub must also accept bare "linux"
+      without expanding it to "linux-gnu"; enable CT_OVERRIDE_CONFIG_GUESS_SUB
+      to propagate it to all packages.
+
 #--------------------------------------
 comment "Generic target options"
 

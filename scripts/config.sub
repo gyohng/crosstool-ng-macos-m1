@@ -1541,6 +1541,10 @@ EOF
 		kernel=ironclad
 		os=`echo "$basic_os" | sed -e 's|ironclad|mlibc|'`
 		;;
+	linux)
+		kernel=linux
+		os=
+		;;
 	linux*)
 		kernel=linux
 		os=`echo "$basic_os" | sed -e 's|linux|gnu|'`
@@ -2188,7 +2192,7 @@ case $os in
 		# Restricted further below
 		;;
 	'')
-		if test x"$obj" = x
+		if test x"$obj" = x && test x"$kernel" = x
 		then
 			echo "Invalid configuration '$1': Blank OS only allowed with explicit machine code file format" 1>&2
 		fi
@@ -2230,7 +2234,8 @@ esac
 case $kernel-$os-$obj in
 	linux-gnu*- | linux-android*- | linux-dietlibc*- | linux-llvm*- \
 		    | linux-mlibc*- | linux-musl*- | linux-newlib*- \
-		    | linux-relibc*- | linux-uclibc*- | linux-ohos*- )
+		    | linux-relibc*- | linux-uclibc*- | linux-ohos*- \
+		    | linux-- )
 		;;
 	uclinux-uclibc*- | uclinux-gnu*- )
 		;;

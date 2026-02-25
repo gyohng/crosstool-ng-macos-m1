@@ -1144,6 +1144,10 @@ CT_DoBuildTargetTuple()
             ;;
     esac
 
+    if [ "${CT_TARGET_OMIT_LIBC_SUFFIX}" = "y" ]; then
+        CT_TARGET_SYS=
+    fi
+
     # Set the default values for ARCH, ABI, CPU, TUNE, FPU and FLOAT
     for tmp in ARCH ABI CPU TUNE FPU FLOAT ENDIAN; do
         eval "unset CT_ARCH_${tmp}_CFLAG CT_ARCH_WITH_${tmp} CT_ARCH_WITH_${tmp}_32 CT_ARCH_WITH_${tmp}_64"
