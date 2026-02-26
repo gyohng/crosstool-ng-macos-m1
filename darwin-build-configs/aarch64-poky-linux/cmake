@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+
+if [ "$*" == "--version" ]; then
+    echo "cmake version 4.0.3 (Poky/Yocto toolchain)"
+    echo ""
+    echo "CMake suite maintained and supported by Kitware (kitware.com/cmake)."
+    exit 0
+fi
+
+if [ "$*" == "-E capabilities" ]; then
+    echo "CMake Error: Unknown argument -E"
+    echo "CMake Error: Run 'cmake --help' for all supported options."
+    exit 1
+fi
+
+for arg in "$@"; do
+    if [[ $arg = "--build" ]]; then
+        exec cmake "$@"
+    fi
+done
+
+exec cmake \
+    -G Ninja \
+    -DCMAKE_TOOLCHAIN_FILE=/opt/cross/aarch64-poky-linux/toolchain.cmake \
+    "$@"
