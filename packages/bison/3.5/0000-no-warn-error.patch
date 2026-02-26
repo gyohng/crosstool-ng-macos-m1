@@ -118,6 +118,17 @@ diff -ruN bison-3.5a/configure.ac bison-3.5/configure.ac
    # Warnings for the test suite only.
    for i in $warn_tests;
    do
+diff -ruN bison-3.5a/lib/obstack.h bison-3.5/lib/obstack.h
+--- bison-3.5a/lib/obstack.h	2024-03-18 22:23:37.151286086 +0800
++++ bison-3.5/lib/obstack.h	2024-03-18 22:15:40.042813265 +0800
+@@ -227,7 +227,7 @@
+    should either abort gracefully or use longjump - but shouldn't
+    return.  The default action is to print a message and abort.  */
+-extern __attribute_noreturn__ void (*obstack_alloc_failed_handler) (void);
++extern void (*obstack_alloc_failed_handler) (void);
+ 
+ /* Exit value used when 'print_and_abort' is used.  */
+ extern int obstack_exit_failure;
 diff -ruN bison-3.5a/lib/obstack.c bison-3.5/lib/obstack.c
 --- bison-3.5a/lib/obstack.c	2024-03-18 22:23:37.151286086 +0800
 +++ bison-3.5/lib/obstack.c	2024-03-18 22:15:40.042813265 +0800

@@ -1,0 +1,6 @@
+diff -ruN a/Makefile b/Makefile
+--- a/Makefile
++++ b/Makefile
+@@ -415,1 +415,1 @@
+-others: $(common-objpfx)testrun.sh $(common-objpfx)debugglibc.sh
++others:
