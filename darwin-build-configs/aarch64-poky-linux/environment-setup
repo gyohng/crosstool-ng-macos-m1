@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Source this file to set up cross-compilation environment:
+#   source /path/to/aarch64-poky-linux/environment-setup
+
+CROSS_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CROSS_PREFIX="$(basename "${CROSS_ROOT}")"
+CROSS_SYSROOT="${CROSS_ROOT}/${CROSS_PREFIX}/sysroot"
+
+export CC="${CROSS_ROOT}/bin/${CROSS_PREFIX}-gcc --sysroot=${CROSS_SYSROOT}"
+export CXX="${CROSS_ROOT}/bin/${CROSS_PREFIX}-g++ --sysroot=${CROSS_SYSROOT}"
+export CPP="${CROSS_ROOT}/bin/${CROSS_PREFIX}-cpp --sysroot=${CROSS_SYSROOT}"
+export AS="${CROSS_ROOT}/bin/${CROSS_PREFIX}-as"
+export LD="${CROSS_ROOT}/bin/${CROSS_PREFIX}-ld --sysroot=${CROSS_SYSROOT}"
+export AR="${CROSS_ROOT}/bin/${CROSS_PREFIX}-ar"
+export NM="${CROSS_ROOT}/bin/${CROSS_PREFIX}-nm"
+export RANLIB="${CROSS_ROOT}/bin/${CROSS_PREFIX}-ranlib"
+export STRIP="${CROSS_ROOT}/bin/${CROSS_PREFIX}-strip"
+export OBJCOPY="${CROSS_ROOT}/bin/${CROSS_PREFIX}-objcopy"
+export OBJDUMP="${CROSS_ROOT}/bin/${CROSS_PREFIX}-objdump"
+export READELF="${CROSS_ROOT}/bin/${CROSS_PREFIX}-readelf"
+
+export CFLAGS="--sysroot=${CROSS_SYSROOT}"
+export CXXFLAGS="--sysroot=${CROSS_SYSROOT}"
+export LDFLAGS="--sysroot=${CROSS_SYSROOT}"
+
+export PKG_CONFIG_PATH=""
+export PKG_CONFIG_LIBDIR="${CROSS_SYSROOT}/usr/lib/pkgconfig:${CROSS_SYSROOT}/usr/share/pkgconfig"
+export PKG_CONFIG_SYSROOT_DIR="${CROSS_SYSROOT}"
+
+export CONFIGURE_FLAGS="--host=${CROSS_PREFIX} --with-sysroot=${CROSS_SYSROOT}"
+
+echo "Cross-compilation environment set for ${CROSS_PREFIX}"
+echo "  sysroot: ${CROSS_SYSROOT}"
+echo "  CC:      $(${CROSS_ROOT}/bin/${CROSS_PREFIX}-gcc --version | head -1)"
